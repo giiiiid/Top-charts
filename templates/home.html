@@ -33,8 +33,9 @@ Music Taste
   </div>
   <div class="max-w-xl bg-white rounded-lg shadow-lg overflow-hidden">
     <div class="relative">
+      {% for music in musics %}
       <img
-        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+        src="{{music.cover_image.url}}"
         class="object-cover">
       <div class="absolute p-4 inset-0 flex flex-col justify-end bg-gradient-to-b from-transparent to-gray-900 backdrop backdrop-blur-5 text-white">
         <h3 class="font-bold artist">{{music.artiste}}</h3>
@@ -48,7 +49,7 @@ Music Taste
         </div>
       </div>
     </div>
-    {% for music in musics %}
+    
     <div class="flex justify-between text-xs font-semibold text-gray-500 px-4 py-2">
       <div class="currentDuration">
         0:00
@@ -78,9 +79,8 @@ Music Taste
           {{music.artiste}} - {{music.music_name}}
         </div>
         <div class="text-xs text-gray-400">
-          
         </div>
-        <a href="media/{{music.music_file}}" class="focus:outline-none pr-4 group">
+        <a href="{{music.music_file.url}}" class="focus:outline-none pr-4 group">
           <svg class="w-4 h-4 group-hover:text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
         </a>
       </li>
@@ -90,13 +90,11 @@ Music Taste
 </div>
 <a href="{% url 'add' %}" class="w-20 h-20 bg-green-600 absolute rounded-full right-48 bottom-12 flex justify-center items-center cursor-pointer block">
 
- 
   <svg xmlns='http://www.w3.org/2000/svg' class='ionicon h-10 w-10 text-gray-100 font-black' viewBox='0 0 512 512'><title>Add</title><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32' d='M256 112v288M400 256H112'/></svg>
   
 </a>
-<audio class="audio-player" preload="metadata" autoplay="false" src="#"></audio>
+<audio class="audio-player" preload="metadata" autoplay="false" src="{{music.music_file.url}}"></audio>
 </div>
-
 
 <script>
   const player=document.querySelector('.audio-player')
